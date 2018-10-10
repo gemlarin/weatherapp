@@ -2,7 +2,15 @@
 <template>  
     <div id="sidebar">
         <DrawerToggleButton className="drawerbutton"/>
-        <div><p>Sidebar is here</p></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="weather--icon">
+                  <img src="@/assets/logo.svg" alt="logo" />
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
 </template>
 
@@ -17,7 +25,7 @@
       })
     },
     components:{
-DrawerToggleButton
+      DrawerToggleButton
     },
     computed: {
       open () {
@@ -35,13 +43,17 @@ DrawerToggleButton
     }
   }
 </script>
-<style>
+<style lang="scss">
     #sidebar{
         position:absolute;
         width:300px;
         left:-300px;
         top:0;
-        background-color:green;
+        background: #21b5ef; /* Old browsers */
+        background: -moz-linear-gradient(top, #2e65f0 0%, #0d7487 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #2e65f0 0%,#0d7487 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #2e65f0 0%,#0d7487 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2e65f0', endColorstr='#1d51d4',GradientType=0 ); /* IE6-9 */
         height:100vh;
         z-index:300;
     }

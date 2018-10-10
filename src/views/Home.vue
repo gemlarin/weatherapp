@@ -44,18 +44,5 @@ export default {
 </script>
 
 <style lang="scss">
-  #home{
-    height:100vh;
-    width:100vw;
-      #main--results{
-      padding:20px 20px 0 20px;
-      height:100vh;
-      width:100vw;
-      overflow:scroll;
-        .card--day{
-          margin-top:10px;
-          padding:20px;
-        }
-      }
-  }
+
 </style>

@@ -32,5 +32,4 @@ export default {
 
 <style lang="scss">
 
-
 </style>
