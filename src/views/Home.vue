@@ -1,21 +1,61 @@
+<!-- this component holds the main view -->
 <template>
-<div class="container">
-    <div class="row">
-      <div class="col-12">
-        This is a bootstrap test
+  <div id="home">
+    <div id="main--results" class="d-flex flex-column">
+      <LocationHeader :location="location"/>
+      <div class="list--days flex-fill" v-for="(day, index) in days" :key="index">
+          <Day :day="day" :overview="overview[index]" :hightemp="hightemp[index]" :lowtemp="lowtemp[index]"/>
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import LocationHeader from '@/components/Weather/Atoms/LocationHeader'
+import Day from '@/components/Weather/Molecules/Day'
 
 export default {
   name: 'home',
-  components: {
-    HelloWorld
+  data: function () {
+    return {
+      location:"Las Vegas",
+      days:['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      hightemp:['60f', '62f', '67f', '70f', '69f', '71f', '74f'],
+      lowtemp:['33f', '42f', '38f', '41f', '48f', '58f', '57f'],
+      overview:[
+        'overview one',
+        'overview one',
+        'overview one',
+        'overview one',
+        'overview one',
+        'overview one',
+        'overview one'
+      ]
+    }
+  },
+  props:{
+
+  },
+  components:{
+    LocationHeader,
+    Day
   }
 }
 </script>
+
+<style lang="scss">
+  #home{
+    height:100vh;
+    width:100vw;
+      #main--results{
+      padding:20px 20px 0 20px;
+      height:100vh;
+      width:100vw;
+      overflow:scroll;
+        .card--day{
+          margin-top:10px;
+          padding:20px;
+        }
+      }
+  }
+</style>
