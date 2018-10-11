@@ -4,7 +4,7 @@
     <div id="main--results" class="d-flex flex-column">
       <LocationHeader :location="location"/>
       <div class="list--days flex-fill" v-for="(day, index) in days" :key="index">
-          <Day :day="day" :overview="overview[index]" :hightemp="hightemp[index]" :lowtemp="lowtemp[index]"/>
+          <Day :day="day" :index="index" :overview="overview[index]" :hightemp="hightemp[index]" :lowtemp="lowtemp[index]"/>
       </div>
     </div>
   </div>

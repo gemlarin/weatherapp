@@ -47,3 +47,25 @@ describe('Day.vue', () => {
     expect(wrapper.text()).to.include(lowtemp)
   })
 })
+
+describe('convertKtoF()', () => {
+  let wrapper;
+  let componentInstance;
+  it('returns fahrenheit when provided calvin', () => {
+    wrapper = shallowMount(Day);
+    componentInstance = wrapper.vm;
+    expect(componentInstance.convertKtoF(400)).to.be.equal(260);
+  });
+})
+
+describe('splitString()', () => {
+  let wrapper;
+  let provided = "Oct 11 2018"
+  let expects = ['Oct','11','2018']
+  let componentInstance;
+  it('splits a date on spaces and returns an array of date parts', () => {
+    wrapper = shallowMount(Day);
+    componentInstance = wrapper.vm;
+    expect(componentInstance.splitDate(provided)).to.deep.equal(expects);
+  });
+})

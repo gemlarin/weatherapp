@@ -9,6 +9,9 @@
     "test:unit": "vue-cli-service test:unit",
     "start": "node server.js"
   },
+  "browser": {
+    "electron": false
+  },
   "dependencies": {
     "express": "^4.16.3",
     "gsap": "^2.0.2",
@@ -29,7 +32,6 @@
     "chai": "^4.1.2",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
-    "vue-resource-mocker": "^1.0.3",
     "vue-template-compiler": "^2.5.17"
   }
 }
