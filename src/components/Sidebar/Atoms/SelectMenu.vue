@@ -58,12 +58,12 @@
         .state-select:not(:hover) > i.toggle.icon-arrow-down {
         display: block !important;
         }
-        .state-select:not(:hover) > i.toggle.icon-arrow-up {
-        display: none !important;
-        }
-        .state-select:not(:hover) label.option > input:not(:checked) ~ span.title {
-            display: none !important;
-        }
+        // .state-select:not(:hover) > i.toggle.icon-arrow-up {
+        // display: none !important;
+        // }
+        // .state-select:not(:hover) label.option > input:not(:checked) ~ span.title {
+        //     display: none !important;
+        // }
         .state-select > i.toggle {
             position: absolute;
             z-index: 4;
