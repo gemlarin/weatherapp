@@ -2,11 +2,10 @@
 
 ## Project setup
 
-### Global Dependancies
-
 
 ### Install Global dependancy
-There is a Vue Cli 3 global dependancy in order to run npm commands for serve, build, and test. This is because webpack runs these commands through the 'vue-cli-service'.
+
+Yes, I know the instructions said NO global dependacies so I left it out of the package.json. However, in order to build or test this solution locally, you will have to install it using the install command below. This is because webpack runs these commands through the 'vue-cli-service'.
 
 ```
 npm install -g @vue/cli
