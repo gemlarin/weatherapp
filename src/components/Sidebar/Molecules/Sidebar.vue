@@ -81,14 +81,14 @@
         },
         checkWindow(){
             var w = this.checkWindowWidth()
-            if(w > 991){
+            if(w > 768){
                 
                 this.showToggleBtn = false;
                 TweenMax.set(this.$el, {
                     x: this.$el.offsetWidth
                 })
             }
-            if(w <= 991){
+            if(w <= 768){
                
                 this.showToggleBtn = true;
                 TweenMax.set(this.$el, {

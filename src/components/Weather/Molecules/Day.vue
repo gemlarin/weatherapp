@@ -1,5 +1,5 @@
 <template>
-    <div class="card--day d-flex">
+    <div class="card--day d-flex" :class="{ 'padding--left': isWide }">
         <div class="date-wrap align-self-stretch">
             <h3>{{stringDay}}</h3>
             <p>{{stringMonth}} {{intDay}}, {{intYear}}</p>
@@ -41,6 +41,7 @@ export default {
         iconPath:'',
         highTemp:0,
         lowTemp:0,
+        isWide:true,
         condidtion:''
     }
   },
@@ -74,7 +75,27 @@ export default {
             this.initCondition()
         },
     },
+    mounted () {
+        this.checkWindow();
+        window.addEventListener("resize", () => {
+            this.checkWindow();
+        });
+    },
     methods:{
+    checkWindowWidth(){
+        let ww = window.innerWidth;
+        return ww;
+        },
+        checkWindow(){
+            var w = this.checkWindowWidth()
+            if(w > 768){
+            this.isWide = true;
+            }
+            if(w <= 768){
+            this.isWide = false;
+            }
+            return
+        },
         convertKtoF(val){
             const celsius = val - 273
             let fahrenheit = Math.floor(celsius * (9/5) + 32)
@@ -173,10 +194,13 @@ export default {
 </script>
 
 <style lang="scss">
+    .padding--left{
+        padding-left:290px;
+        max-width:700px !important;
+    }
     .card--day{
         background-color:transparent !important;   
         max-width:400px;
-        border-bottom:1px solid #395db8;
         padding-bottom:15px;
         padding-top:15px;
         h4{
@@ -216,5 +240,6 @@ export default {
                 font-size:14px !important;
             }
     }
+    
 
 </style>
