@@ -73,16 +73,7 @@
             }
             else{
                 alert('You must enter a city and state.')
-            }
-            var w = this.checkWindowWidth()
-             if(w <= 991){
-               
-                this.showToggleBtn = true;
-                TweenMax.set(this.$el, {
-                    x: -300
-                })
-            }
-            
+            }    
         },
         checkWindowWidth(){
             let ww = window.innerWidth;
