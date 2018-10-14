@@ -40,6 +40,9 @@ npm run test:unit
 
 ### Thought process when creating the solution.
 
+I wanted to have a solution that provided search by city, that populates a 5 day weather forecast as well as a current weather overview. I wanted the solution to be mobile first, with a UX designed for a solid mobile experience. A sidedrawer would serve as access to the search options and the daily overview. For larger viewports, I did not want the drawer to be collapsale since I would have the space to display all information on screen. Being unsure of how long queries would take to resolve, there needed to be a loader or some other indication that a process was occuring. 
+
+After reviewing the API documentation I discovered that queries would have to be done by either a city code provided in a lengthy .json document or by providing a lat/lng. Having used the Google Geocoding API before, I knew the results would reliably provide a lat/lng by city search so I decided to first query the Geocoding API to retreive the lat/lng and feed that into the OWM API as I didnt want to have to parse a 3000 line .json document every query. 
 
 ### Tradeoffs
 1. Using vue-resource vs Axios for API calls: vue-resource has better documentation than vue-axios at this time.
