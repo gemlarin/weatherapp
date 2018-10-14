@@ -2,8 +2,11 @@
 <template>
   <div>
     <div id="app">
-      <Sidebar v-on:setState="onSetState" :currentWeather="currentWeatherData"/>
-      <router-view />
+      <div class="container--loader" v-if="searching">
+        <img src="./assets/spinner.svg" alt="loading" />
+      </div>
+      <Sidebar v-on:setState="onSetState" v-on:setCity="onSetCity" v-on:startSearch="onStartSearch" :weeklyWeatherData="weeklyWeatherData"/>
+      <router-view :weeklyWeatherData="weeklyWeatherData" />
     </div>
   </div>
 </template>
@@ -11,6 +14,8 @@
 import Sidebar from "@/components/Sidebar/Molecules/Sidebar";
 import LocationHeader from "@/components/Weather/Atoms/LocationHeader";
 import Day from "@/components/Weather/Molecules/Day";
+import { GEO_KEY } from "@/components/Modules/keys.js"
+import { OWM_KEY } from "@/components/Modules/keys.js"
 
 export default {
   name: "app",
@@ -20,34 +25,39 @@ export default {
       cityName: String,
       stateName: "NY",
       numDaysToReturn: 5,
-      //replace this with .env variable to hide key before production
-      geoLocateKey: "AIzaSyAjOSLkyD5mrpF870GVJwVVDpsbgAhH8lk",
-      openWeatherMapKey: "",
+      geoLocateKey: GEO_KEY,
+      openWeatherMapKey: OWM_KEY,
       geoData: {},
-      weeklyWeatherData: {},
-      currentWeatherData: {}
+      searching:true,
+      weeklyWeatherData: {}
     };
   },
   mounted() {
-    //testing purposes only - remove before prod
+    //init on load so something populates the fields
+    //later tie this to getlocation
     this.cityName = "Niagara Falls";
+    this.joinCity();
   },
   watch: {
     concatedCity: function() {
       this.queryGeoData();
     },
-    cityName: function() {
-      this.joinCity();
-    },
     //remove this after adding search button to initiate search
     //reminder: also be sure to prevent double clicks
     geoData: function() {
+      this.searching = true;
       this.initSearch();
     }
   },
   methods: {
     onSetState(val) {
       this.stateName = val;
+    },
+    onSetCity(val) {
+      this.cityName = val;
+    },
+    onStartSearch(){
+      this.joinCity();
     },
     joinCity() {
       //some cities will have more than one word in name. To query the Geolocate API, we need to replace the spaces with a "+""
@@ -68,14 +78,13 @@ export default {
         this.geoData = data.body.results[0].geometry.location;
       });
     },
-    convertKtoF() {
+    convertKtoF(val) {
       const celsius = val - 273;
       let fahrenheit = Math.floor(celsius * (9 / 5) + 32);
       return fahrenheit;
     },
     initSearch() {
       this.getWeeklyWeather();
-      this.getCurrentWeather();
     },
     getWeeklyWeather() {
       let searchWeekString =
@@ -85,24 +94,13 @@ export default {
         this.geoData.lng +
         "&cnt=" +
         this.numDaysToReturn +
-        "&APPID=7030c411998be2c8f9f5443cea8bcb3b";
+        "&APPID=" + this.openWeatherMapKey;
       this.$http.get(searchWeekString).then(response => {
         let data = response;
         this.weeklyWeatherData = data;
+        this.searching = false;
       });
     },
-    getCurrentWeather() {
-      let searchCurrentString =
-        "//api.openweathermap.org/data/2.5/weather?lat=" +
-        this.geoData.lat +
-        "&lon=" +
-        this.geoData.lng +
-        "&APPID=7030c411998be2c8f9f5443cea8bcb3b";
-      this.$http.get(searchCurrentString).then(response => {
-        let data = response;
-        this.currentWeatherData = data;
-      });
-    }
   },
   components: {
     LocationHeader,
@@ -117,22 +115,25 @@ export default {
 $primary-color: #333;
 $secondary-color: #222;
 
-//pages
+#app{
+	font-family: 'Open Sans', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
 #home {
   height: 100vh;
   width: 100vw;
 }
 
-//organisms
 #main--results {
-  padding: 20px 20px 0 20px;
+  padding: 20px 40px 0 60px;
   height: 100vh;
   width: 100vw;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 }
 
-//moles
 .card.card--day {
   margin-top: 10px;
   padding: 20px;
@@ -150,6 +151,20 @@ ul {
   padding-left: 0;
   li {
     list-style: none;
+  }
+}
+.container--loader{
+  height:100px;
+  width:100px;
+  background:#2e65f0;
+
+  position:absolute;
+  z-index:400;
+  left:calc(50vw - 50px);
+  top:calc(50vh - 50px);
+  img{
+    height:100px;
+    width:100px;
   }
 }
 </style>

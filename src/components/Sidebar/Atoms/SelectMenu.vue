@@ -5,7 +5,7 @@
     <input type="radio" name="option">
     <i class="toggle icon icon-arrow-down"></i>
     <i class="toggle icon icon-arrow-up"></i>
-    <span class="placeholder">Search by state...</span>
+    <span class="placeholder">Select state...</span>
     <StateList v-on:setState="onSetState" :state="state" v-for="(state, index) in states" :key="index"/>
 </div>
 
@@ -38,6 +38,7 @@
         .select-wrap{
             max-height:200px;
             overflow:scroll;
+            margin-top:40px;
         }
         .state-select {
         position: relative;

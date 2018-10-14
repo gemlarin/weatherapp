@@ -1,9 +1,7 @@
 <template>
   <div class="btn--toggle" @click="handleClick">    
-    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0h24v24H0z" fill="none"/>
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
-    </svg>
+    <span v-if="open" class="icon icon-arrow-right"></span>
+    <span v-if="!open"  class="icon icon-arrow-left"></span>
   </div>
 </template>
 
@@ -13,7 +11,7 @@
     computed: {
       open () {
         return this.$store.state.ui.sidebarOpen
-      }
+      },
     },
     methods: {
       handleClick () {
@@ -22,9 +20,20 @@
     }
   }
 </script>
-<style>
+<style lang="scss">
     .btn--toggle{
-        position:relative;
-        left:330px;
+        position:absolute;
+        left:300px;
+        top:70px;
+        background-color:#2e65f0;
+        width:35px;
+        height:35px;
+        padding-top:6px;
+        padding-left:10px;
+        border-radius: 0 4px 4px 0;
+        cursor:pointer;
+        span{
+          color:#fff;
+        }
     }
 </style>

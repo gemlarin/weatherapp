@@ -3,33 +3,49 @@
 // import App from '@/App'
 // import Vue from 'vue'
 // import VueRouter from 'vue-router'
-// import VueResource from 'vue-resource'
-
 
 
 // Vue.use(VueRouter)
-// Vue.use(VueResource)
+// const $http = {
+//   get : function() {}
+// }
+
 
 // describe('the concatedCity method', () => {
 //   let wrapper;
 //   let componentInstance;
 
+
 //   it('a two word city is concatonated', () => {
-//     wrapper = shallowMount(App);
+//     wrapper = shallowMount(App, {
+//       mocks: {
+//         $http
+//       }
+//     });
 //     componentInstance = wrapper.vm;
 //     componentInstance.cityName = "Niagara Falls"
 //     componentInstance.joinCity();
 //     expect(componentInstance.concatedCity).to.be.equal('Niagara+Falls');
 //   });
 //   it('a three word city is concatonated', () => {
-//     wrapper = shallowMount(App);
+//     wrapper = shallowMount(App, {
+//       mocks: {
+//         $http:{
+//           $http
+//         }
+//       }
+//     });
 //     componentInstance = wrapper.vm;
 //     componentInstance.cityName = "Some Three Words"
 //     componentInstance.joinCity();
 //     expect(componentInstance.concatedCity).to.be.equal('Some+Three+Words');
 //   });
 //   it('a one word city is NOT concatonated', () => {
-//     wrapper = shallowMount(App);
+//     wrapper = shallowMount(App, {
+//       mocks: {
+//         $http
+//       }
+//     });
 //     componentInstance = wrapper.vm;
 //     componentInstance.cityName = "Reno"
 //     componentInstance.joinCity();

@@ -4,48 +4,50 @@ import Day from '@/components/Weather/Molecules/Day.vue'
 
 describe('Day.vue', () => {
 
-  it('Stores the location state', () => {
-    const location = 'new location'
-    const wrapper = shallowMount(Day, {
-      propsData: { location }
+  const data = {
+    body:{
+      list:[
+        {
+        weather:
+          [
+            {
+              description:'cloudy'
+            }
+          ],
+          temp:{
+            max:'400',
+            min:'300'
+          }
+        }
+        
+      ]
+    }
+    
+    
+  }
+  let wrapper;
+  let componentInstance;
+  beforeEach(() => {
+    wrapper = shallowMount(Day, {
+      propsData:{
+        weeklyWeatherData:data,
+        index:1
+      }
     });
-    expect(wrapper.vm.location).to.include(location);
-  })
-  it('renders props.location when passed', () => {
-    const location = 'new location'
-    const wrapper = shallowMount(Day, {
-      propsData: { location }
-    })
-    expect(wrapper.text()).to.include(location)
-  })
-  it('renders props.day when passed', () => {
-    const day = 'new day'
-    const wrapper = shallowMount(Day, {
-      propsData: { day }
-    })
-    expect(wrapper.text()).to.include(day)
-  })
-  it('renders props.overview when passed', () => {
-    const overview = 'new overview'
-    const wrapper = shallowMount(Day, {
-      propsData: { overview }
-    })
-    expect(wrapper.text()).to.include(overview)
-  })
-  it('renders props.hightemp when passed', () => {
-    const hightemp = 'new hightemp'
-    const wrapper = shallowMount(Day, {
-      propsData: { hightemp }
-    })
-    expect(wrapper.text()).to.include(hightemp)
-  })
-  it('renders props.lowtemp when passed', () => {
-    const lowtemp = 'new lowtemp'
-    const wrapper = shallowMount(Day, {
-      propsData: { lowtemp }
-    })
-    expect(wrapper.text()).to.include(lowtemp)
-  })
+    componentInstance = wrapper.vm;
+  });
+  it('renders a weather condition', () => { 
+    componentInstance.initCondition();
+    expect(wrapper.html()).to.include('cloudy')
+  });
+  it('converts K to F and renders a high temp', () => { 
+    componentInstance.intHighTemp();
+    expect(wrapper.html()).to.include('260')
+  });
+  it('converts K to F and  a low temp', () => { 
+    componentInstance.intLowTemp();
+    expect(wrapper.html()).to.include('80')
+  });
 })
 
 describe('convertKtoF()', () => {

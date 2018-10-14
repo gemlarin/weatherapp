@@ -10,13 +10,18 @@ export default new Vuex.Store({
     ui
   },
   state: {
-
+    geoData:{}
   },
   mutations: {
-
+    addGeoData:(state, val) =>{
+     state.geoData = val;
+  },
   },
   actions: {
 
   },
   strict: debug
 })
+
+
+

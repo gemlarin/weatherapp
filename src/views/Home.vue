@@ -1,10 +1,10 @@
 <!-- this component holds the main view -->
 <template>
-  <div id="home">
+  <div id="home" :class="{ marginleft: isWide }">
     <div id="main--results" class="d-flex flex-column">
-      <LocationHeader :location="location"/>
-      <div class="list--days flex-fill" v-for="(day, index) in days" :key="index">
-          <Day :day="day" :index="index" :overview="overview[index]" :hightemp="hightemp[index]" :lowtemp="lowtemp[index]"/>
+      <LocationHeader :cityName="cityName"/>
+      <div class="list--days" v-for="(index) in 5" :key="index">
+          <Day :index="index" :weeklyWeatherData="weeklyWeatherData"/>
       </div>
     </div>
   </div>
@@ -18,31 +18,60 @@ export default {
   name: 'home',
   data: function () {
     return {
-      location:"Las Vegas",
-      days:['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      hightemp:['60f', '62f', '67f', '70f', '69f', '71f', '74f'],
-      lowtemp:['33f', '42f', '38f', '41f', '48f', '58f', '57f'],
-      overview:[
-        'overview one',
-        'overview one',
-        'overview one',
-        'overview one',
-        'overview one',
-        'overview one',
-        'overview one'
-      ]
+      cityName:'',
+      isWide:true,
     }
   },
-  props:{
-
+  props:[
+    'weeklyWeatherData'
+  ],
+    watch: {
+      weeklyWeatherData: function() {
+          this.initCity()
+      },
   },
   components:{
     LocationHeader,
     Day
+  },
+  mounted () {
+      this.checkWindow();
+      window.addEventListener("resize", () => {
+          this.checkWindow();
+      });
+  },
+  methods:{
+    initCity(){
+      let city = this.weeklyWeatherData.body.city.name
+      this.cityName = city
+    },
+    checkWindowWidth(){
+      let ww = window.innerWidth;
+      return ww;
+    },
+    checkWindow(){
+        var w = this.checkWindowWidth()
+        if(w > 991){
+          this.isWide = true;
+        }
+        if(w <= 991){
+          this.isWide = false;
+        }
+        return
+    }
   }
 }
 </script>
 
 <style lang="scss">
-
+  #home{
+    background-color:#0d39a8;
+  }
+  .list--days{
+    margin-bottom:0;
+  }
+  .marginleft{
+    margin-left:290px;
+    
+  }
 </style>

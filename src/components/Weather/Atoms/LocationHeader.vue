@@ -1,20 +1,20 @@
 <template>
-    <h4>7 day forecast for {{ this_location }}</h4>
+    <h4>{{ this.cityName }} 5 Day</h4>
 </template>
 
 <script>
 export default {
   name: 'locationheader',
-  data: function () {
-    return {
-      this_location:this.location
-    }
-  },
-   props: ['location'],
+
+   props: ['cityName'],
 }
 </script>
 
 <style lang="scss">
-
+  h4{
+    font-size:16px !important;
+    font-weight:700 !important;
+    color:#fff !important;
+  }
 
 </style>
