@@ -1,4 +1,4 @@
-# builditapp
+# weatherapp
 
 ## Project setup
 
