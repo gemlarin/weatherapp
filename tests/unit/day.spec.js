@@ -40,11 +40,11 @@ describe('Day.vue', () => {
     componentInstance.initCondition();
     expect(wrapper.html()).to.include('cloudy')
   });
-  it('converts K to F and renders a high temp', () => { 
+  it('renders a high temp', () => { 
     componentInstance.intHighTemp();
     expect(wrapper.html()).to.include('260')
   });
-  it('converts K to F and  a low temp', () => { 
+  it('renders a low temp', () => { 
     componentInstance.intLowTemp();
     expect(wrapper.html()).to.include('80')
   });
